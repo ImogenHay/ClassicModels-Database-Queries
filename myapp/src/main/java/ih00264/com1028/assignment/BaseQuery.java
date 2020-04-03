@@ -12,7 +12,7 @@ public class BaseQuery {
 
 	public BaseQuery(String uname, String pwd){
 		try {
-		      //Class.forName("com.mysql.jdbc.Driver");
+		    //Class.forName("com.mysql.jdbc.Driver");
 			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver ());
 			con = DriverManager.getConnection( db, uname, pwd);
 		}
