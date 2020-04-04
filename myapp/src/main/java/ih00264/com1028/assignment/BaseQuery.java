@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class BaseQuery {
 	protected Connection con;
-	private final String db = "jdbc:mysql://localhost:3306/classicmodels";
+	private final String db = "jdbc:mysql://localhost:3306/classicmodels?&serverTimezone=UTC";
 
 	public BaseQuery(String uname, String pwd){
 		try {
@@ -27,5 +27,7 @@ public class BaseQuery {
 		ResultSet rs = s.executeQuery(query);
 		return rs;
 	}
+	
+
 
 }

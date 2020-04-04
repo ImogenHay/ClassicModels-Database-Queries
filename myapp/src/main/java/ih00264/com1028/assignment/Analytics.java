@@ -56,4 +56,22 @@ public class Analytics extends BaseQuery {
 		
 	}
 	
+	
+	//public ArrayList<ArrayList<Object>> orderBy(List<String> columns, String table) throws SQLException {
+	
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
