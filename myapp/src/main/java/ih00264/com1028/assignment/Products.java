@@ -35,21 +35,19 @@ public class Products {
 		ArrayList<ArrayList<Object>> list = this.analytics.select(this.columns, "products");
 		ArrayList<Product> products = new ArrayList<Product>();
 		for(ArrayList<Object> p_list : list) {
-			String productLine = (String) p_list.get(0);
-			String productCode = (String) p_list.get(1);
-			String productName = (String) p_list.get(2);
-			Product product = new Product(productLine, productCode, productName);
+			Product product = new Product((String) p_list.get(0), (String) p_list.get(1), (String) p_list.get(2));
 			products.add(product);
 		}
 		Collections.sort(products);
 		return products;
 	}
+	
 
 
 
 	@Override
 	public String toString() {
-			StringBuffer buffer = new StringBuffer("1. List the products in each product line:\n");
+			StringBuffer buffer = new StringBuffer("\n\n1. List the products in each product line:\n");
 			buffer.append(String.format("%-31s %-21s %-51s", this.columns.get(0), this.columns.get(1), this.columns.get(2)));
 			buffer.append("\n---------------------------------------------------------------------------------------------------------\n");
 			try {

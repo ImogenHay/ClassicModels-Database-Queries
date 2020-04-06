@@ -84,7 +84,7 @@ public class Product implements Comparable<Product>{
 
 	@Override
 	public String toString() {
-		return String.format("|%-30s| %-20s| %-50s|", productLine, productCode, productName);
+		return String.format("|%-30s| %-20s| %-50s|", this.productLine, this.productCode, this.productName);
 
 	}
 
