@@ -23,11 +23,12 @@ public class App {
 	    //3.
 	    
 		Analytics connection = new Analytics("root","password");
-		
+
 		//1.
 		List<String> columns = Arrays.asList("productLine", "productCode", "productName");
 		Products products = new Products(columns, connection);
 		System.out.println(products.toString());
+
 		
 
 		

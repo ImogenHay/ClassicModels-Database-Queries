@@ -75,14 +75,17 @@ public class Product implements Comparable<Product>{
 
 
 	@Override
-	public int compareTo(Product arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(Product p) {
+		if (getProductLine() == null || p.getProductLine() == null) {
+		      return 0;
+		}
+		return getProductLine().compareTo(p.getProductLine());
 	}
 
 	@Override
 	public String toString() {
-		return "productLine=" + productLine + ", productCode=" + productCode + ", productName=" + productName;
+		return String.format("|%-30s| %-20s| %-50s|", productLine, productCode, productName);
+
 	}
 
 }

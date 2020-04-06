@@ -26,7 +26,7 @@ public class Analytics extends BaseQuery {
 
 	//Methods:
 	//get list of columns (select)
-	//order list by attribute (order by)
+
 	
 	
 	public ArrayList<ArrayList<Object>> select(List<String> columns, String table) throws SQLException {
@@ -56,8 +56,7 @@ public class Analytics extends BaseQuery {
 		
 	}
 	
-	
-	//public ArrayList<ArrayList<Object>> orderBy(List<String> columns, String table) throws SQLException {
+
 	
 }
 	
