@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author imoge
+ * @author imogen
  *
  */
 public class Analytics extends BaseQuery {
@@ -56,9 +56,9 @@ public class Analytics extends BaseQuery {
 	public ArrayList<Payment> sumAmount(ArrayList<Payment> list){
 		for(int row =0; row < list.size()-1; row++) {
 			if(list.get(row).getPaymentDate().equals(list.get(row+1).getPaymentDate())) { //check if same date (GROUP BY)
-				BigDecimal amount = list.get(row).getAmount().add(list.get(row+1).getAmount());
-				Payment newRow = new Payment(list.get(row).getPaymentDate(), amount);
-				list.set(row+1, newRow);
+				BigDecimal amount = list.get(row).getAmount().add(list.get(row+1).getAmount()); 
+				Payment newRow = new Payment(list.get(row).getPaymentDate(), amount); //makes new object with sum of amount column for same date (SUM)
+				list.set(row+1, newRow); //new row replaces combined ones
 				list.remove(row);
 				row--;
 			}
@@ -69,19 +69,18 @@ public class Analytics extends BaseQuery {
 	
 	public ArrayList<Order> innerJoin(ArrayList<ArrayList<Object>> list, ArrayList<OrderDetails> orderDetails, ArrayList<Customer> customers){
 		ArrayList<Order> orders = new ArrayList<Order>();				
-		for(ArrayList<Object> o_list : list) {
+		for(ArrayList<Object> o_list : list) { //Goes through each order
 			Customer matchingCustomer = null;
-			for(Customer customer : customers) {
-				if(customer.getCustomerNumber() == (int)o_list.get(1)) {
+			for(Customer customer : customers) { //Goes through each customer
+				if(customer.getCustomerNumber() == (int)o_list.get(1)) { //Comparing to orders to join tables where same CustomerNumber (INNER JOIN)
 					matchingCustomer = customer;
 					OrderDetails matchingDetails = null;
-					for(OrderDetails orderDetail : orderDetails) {
-						if(orderDetail.getOrderNumber() == (int)o_list.get(0)) {
+					for(OrderDetails orderDetail : orderDetails) { //Goes through each order details for each customer
+						if(orderDetail.getOrderNumber() == (int)o_list.get(0)) { //Comparing to orders to join tables where same OrderNumber (INNER JOIN)
 							matchingDetails = orderDetail;
-							BigDecimal quantityOrdered = new BigDecimal(matchingDetails.getQuantityOrdered());
-							BigDecimal totalPrice = matchingDetails.getPriceEach().multiply(quantityOrdered);
+							BigDecimal totalPrice = matchingDetails.getPriceEach().multiply(new BigDecimal(matchingDetails.getQuantityOrdered())); //finds total price of order of one product
 							Order order = new Order((int)o_list.get(0), (int)o_list.get(1), matchingCustomer,  matchingDetails, totalPrice);
-							orders.add(order);
+							orders.add(order); //adds joined tables to new list of values
 						}
 					}
 				}
@@ -94,9 +93,9 @@ public class Analytics extends BaseQuery {
 	public ArrayList<Order> sumValue(ArrayList<Order> list){
 		for(int row =0; row < list.size()-1; row++) {
 			if(list.get(row).getOrderNumber() == list.get(row+1).getOrderNumber()) { //check if same order number (GROUP BY)				
-				BigDecimal value = list.get(row).getTotalPrice().add(list.get(row+1).getTotalPrice());			
-					Order newRow = new Order(list.get(row).getOrderNumber(), list.get(row).getCustomerNumber(), list.get(row).getCustomer(), list.get(row).getOrderDetails(), value);				
-					list.set(row+1, newRow);
+				BigDecimal value = list.get(row).getTotalPrice().add(list.get(row+1).getTotalPrice()); 		
+					Order newRow = new Order(list.get(row).getOrderNumber(), list.get(row).getCustomerNumber(), list.get(row).getCustomer(), list.get(row).getOrderDetails(), value);//makes new object with sum of totelPrice column for same orderNumber (SUM)				
+					list.set(row+1, newRow); //new row replaces combined ones
 					list.remove(row);
 					row--;
 			}
@@ -107,8 +106,8 @@ public class Analytics extends BaseQuery {
 	
 	public ArrayList<Order> where(ArrayList<Order> list, int max){
 		for(int row =0; row < list.size(); row++) {
-			if (list.get(row).getTotalPrice().compareTo(new BigDecimal(max)) <= 0) { //compareTo returns 1 if greater than
-				list.remove(list.get(row));
+			if (list.get(row).getTotalPrice().compareTo(new BigDecimal(max)) <= 0) { //compareTo returns 1 if greater than (WHERE > max)
+				list.remove(list.get(row)); //removes rows < max
 				row--;
 			}
 		}

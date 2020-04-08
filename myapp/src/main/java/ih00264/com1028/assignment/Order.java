@@ -22,6 +22,7 @@ public class Order implements Comparable<Order>{
 	 * @param customerNumber
 	 * @param customer
 	 * @param orderDetails
+	 * @param totalPrice
 	 */
 	public Order(int orderNumber, int customerNumber, Customer customer, OrderDetails orderDetails, BigDecimal totalPrice) {
 		super();
