@@ -3,6 +3,7 @@
  */
 package ih00264.com1028.assignment;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,12 +21,7 @@ public class Analytics extends BaseQuery {
 	 */
 	public Analytics(String uname, String pwd) {
 		super(uname, pwd);
-		// TODO Auto-generated constructor stub
 	}
-
-
-	//Methods:
-	//get list of columns (select)
 
 	
 	
@@ -57,7 +53,20 @@ public class Analytics extends BaseQuery {
 	}
 	
 
+	public ArrayList<Payment> sum(ArrayList<Payment> list){
+		for(int row =0; row < list.size()-1; row++) {
+			if(list.get(row).getPaymentDate().equals(list.get(row+1).getPaymentDate())) { //check if same date (GROUP BY)
+				BigDecimal amount = list.get(row).getAmount().add(list.get(row+1).getAmount());
+				Payment newRow = new Payment(list.get(row).getPaymentDate(), amount);
+				list.set(row+1, newRow);
+				list.remove(row);
+				row--;
+			}
+		}
+		return list;
+	}
 	
+
 }
 	
 	

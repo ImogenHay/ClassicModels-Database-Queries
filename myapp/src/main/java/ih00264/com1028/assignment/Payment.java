@@ -3,22 +3,22 @@
  */
 package ih00264.com1028.assignment;
 
+import java.math.BigDecimal;
+
 /**
  * @author imogen
  *
  */
 public class Payment implements Comparable<Payment>{
 	
-	//private int customerNumber = 0;
-	//private String checkNumber = null;
 	private String paymentDate = null;
-	private String amount = null;
+	private BigDecimal amount = null;
 	
 	/**
 	 * @param paymentDate
 	 * @param amount
 	 */
-	public Payment(String paymentDate, String amount) {
+	public Payment(String paymentDate, BigDecimal amount) {
 		super();
 		this.paymentDate = paymentDate;
 		this.amount = amount;
@@ -41,14 +41,14 @@ public class Payment implements Comparable<Payment>{
 	/**
 	 * @return the amount
 	 */
-	public String getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
 	/**
 	 * @param amount the amount to set
 	 */
-	public void setAmount(String amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 

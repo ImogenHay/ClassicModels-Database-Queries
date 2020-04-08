@@ -31,7 +31,7 @@ public class Products {
 
 
 
-	public ArrayList<Product> createObjects() throws SQLException{
+	public ArrayList<Product> createList() throws SQLException{
 		ArrayList<ArrayList<Object>> list = this.analytics.select(this.columns, "products");
 		ArrayList<Product> products = new ArrayList<Product>();
 		for(ArrayList<Object> p_list : list) {
@@ -51,14 +51,15 @@ public class Products {
 			buffer.append(String.format("%-31s %-21s %-51s", this.columns.get(0), this.columns.get(1), this.columns.get(2)));
 			buffer.append("\n---------------------------------------------------------------------------------------------------------\n");
 			try {
-				ArrayList<Product> list = this.createObjects();
+				ArrayList<Product> list = this.createList();
 				for (Product product : list) {
 					buffer.append(product.toString() + "\n");
 				}
+				buffer.append("---------------------------------------------------------------------------------------------------------\n");
+				buffer.append("Number of Rows: " + list.size() + "\n");
 			} catch (SQLException e) {
 				System.out.println(e);
 			}
-		buffer.append("---------------------------------------------------------------------------------------------------------\n");
 		return buffer.toString();
 	}
 }

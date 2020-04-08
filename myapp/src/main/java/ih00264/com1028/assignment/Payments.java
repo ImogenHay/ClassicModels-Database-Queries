@@ -3,6 +3,7 @@
  */
 package ih00264.com1028.assignment;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,14 +30,16 @@ public class Payments {
 
 
 
-	public ArrayList<Payment> createObjects() throws SQLException{
+	public ArrayList<Payment> createList() throws SQLException{
 		ArrayList<ArrayList<Object>> list = this.analytics.select(this.columns, "payments");
 		ArrayList<Payment> payments = new ArrayList<Payment>();
 		for(ArrayList<Object> p_list : list) {
-			Payment payment = new Payment(p_list.get(0).toString(), p_list.get(1).toString());
+			BigDecimal amount = new BigDecimal(p_list.get(1).toString());
+			Payment payment = new Payment(p_list.get(0).toString(), amount);
 			payments.add(payment);
 		}
 		Collections.sort(payments);
+		payments = this.analytics.sum(payments);
 		return payments;
 	}
 	
@@ -48,14 +51,16 @@ public class Payments {
 			buffer.append(String.format("%-21s %-21s", this.columns.get(0), this.columns.get(1)));
 			buffer.append("\n-------------------------------------------\n");
 			try {
-				ArrayList<Payment> list = this.createObjects();
+				ArrayList<Payment> list = this.createList();
 				for (Payment payment : list) {
 					buffer.append(payment.toString() + "\n");
 				}
+				buffer.append("-------------------------------------------\n");
+				buffer.append("Number of Rows: " + list.size() + "\n");
 			} catch (SQLException e) {
 				System.out.println(e);
 			}
-		buffer.append("-------------------------------------------\n");
+
 		return buffer.toString();
 	}
 }
