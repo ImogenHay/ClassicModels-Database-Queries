@@ -53,7 +53,7 @@ public class Analytics extends BaseQuery {
 	}
 	
 
-	public ArrayList<Payment> sum(ArrayList<Payment> list){
+	public ArrayList<Payment> sumAmount(ArrayList<Payment> list){
 		for(int row =0; row < list.size()-1; row++) {
 			if(list.get(row).getPaymentDate().equals(list.get(row+1).getPaymentDate())) { //check if same date (GROUP BY)
 				BigDecimal amount = list.get(row).getAmount().add(list.get(row+1).getAmount());
@@ -65,6 +65,30 @@ public class Analytics extends BaseQuery {
 		}
 		return list;
 	}
+	
+	
+	public ArrayList<Order> innerJoin(ArrayList<ArrayList<Object>> list, ArrayList<OrderDetails> orderDetails, ArrayList<Customer> customers){
+		ArrayList<Order> orders = new ArrayList<Order>();				
+		for(ArrayList<Object> o_list : list) {
+			Customer matchingCustomer = null;
+			for(Customer customer : customers) {
+				if(customer.getCustomerNumber() == (int)o_list.get(1)) {
+					matchingCustomer = customer;
+					OrderDetails matchingDetails = null;
+					for(OrderDetails orderDetail : orderDetails) {
+						if(orderDetail.getOrderNumber() == (int)o_list.get(0)) {
+							matchingDetails = orderDetail;
+							Order order = new Order((int)o_list.get(0), (int)o_list.get(1), matchingCustomer,  matchingDetails);
+							orders.add(order);
+						}
+					}
+				}
+			}
+		}
+		return orders;
+	}
+	
+
 	
 
 }

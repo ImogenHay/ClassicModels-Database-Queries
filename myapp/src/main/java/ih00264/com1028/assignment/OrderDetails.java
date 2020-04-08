@@ -68,4 +68,9 @@ public class OrderDetails {
 	public void setPriceEach(BigDecimal priceEach) {
 		this.priceEach = priceEach;
 	}
+
+	@Override
+	public String toString() {
+		return quantityOrdered + "      " + priceEach;
+	}
 }

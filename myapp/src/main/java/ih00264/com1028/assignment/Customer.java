@@ -49,4 +49,9 @@ public class Customer {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+
+	@Override
+	public String toString() {
+		return customerName;
+	}
 }

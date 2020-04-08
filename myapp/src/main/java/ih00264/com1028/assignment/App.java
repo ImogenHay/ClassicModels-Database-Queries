@@ -14,7 +14,7 @@ public class App {
 	    //Output all requirements info:   
 	    //1. List the products in each product line (Products)
 	    //2. Report the total payments by date (Payments)
-	    //3.  List names of customers and their corresponding order number where a particular order from that customer has a value greater than $25,000? 
+	    //3.  List names of customers and their corresponding order number where a particular order from that customer has a value greater than $25,000
 	    //    (Customer, OrderDetails, Order,  Orders) order value = priceEach * quantityOrdered
 	    
 	    //SQL for testing:
@@ -26,14 +26,21 @@ public class App {
 
 		//1.
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
-		Products products = new Products(columns, connection);
-		System.out.println(products.toString());
+		//Products products = new Products(columns, connection);
+		//System.out.println(products.toString());
 		
 		//2.
 		columns = Arrays.asList("PaymentDate", "Amount");
-		Payments payments = new Payments(columns, connection);
-		System.out.println(payments.toString());
+		//Payments payments = new Payments(columns, connection);
+		//System.out.println(payments.toString());
 		
+		//3.
+		columns = Arrays.asList("OrderNumber", "CustomerNumber");
+		Orders orders = new Orders(columns, connection);
+		System.out.println(orders.toString());
+		
+		//SELECT customers.customerName, orders.orderNumber, orderdetails.quantityOrdered, orderdetails.priceEach FROM orders INNER JOIN customers ON customers.customerNumber=orders.customerNumber INNER JOIN orderdetails ON orderdetails.orderNumber=orders.orderNumber;
+
 		
 		
 

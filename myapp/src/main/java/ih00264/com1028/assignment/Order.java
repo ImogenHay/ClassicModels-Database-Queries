@@ -83,6 +83,13 @@ public class Order {
 	public void setOrderDetails(OrderDetails orderDetails) {
 		this.orderDetails = orderDetails;
 	}
+
+	@Override
+	public String toString() {
+		return customer.toString() + "    " + this.orderNumber + "     " +  orderDetails.toString();
+	}
+
+
 	
 	
 

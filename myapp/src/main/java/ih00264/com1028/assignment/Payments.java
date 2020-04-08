@@ -39,7 +39,7 @@ public class Payments {
 			payments.add(payment);
 		}
 		Collections.sort(payments);
-		payments = this.analytics.sum(payments);
+		payments = this.analytics.sumAmount(payments);
 		return payments;
 	}
 	
