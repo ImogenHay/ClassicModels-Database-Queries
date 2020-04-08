@@ -78,7 +78,9 @@ public class Analytics extends BaseQuery {
 					for(OrderDetails orderDetail : orderDetails) {
 						if(orderDetail.getOrderNumber() == (int)o_list.get(0)) {
 							matchingDetails = orderDetail;
-							Order order = new Order((int)o_list.get(0), (int)o_list.get(1), matchingCustomer,  matchingDetails);
+							BigDecimal quantityOrdered = new BigDecimal(matchingDetails.getQuantityOrdered());
+							BigDecimal totalPrice = matchingDetails.getPriceEach().multiply(quantityOrdered);
+							Order order = new Order((int)o_list.get(0), (int)o_list.get(1), matchingCustomer,  matchingDetails, totalPrice);
 							orders.add(order);
 						}
 					}
@@ -86,6 +88,31 @@ public class Analytics extends BaseQuery {
 			}
 		}
 		return orders;
+	}
+	
+	
+	public ArrayList<Order> sumValue(ArrayList<Order> list){
+		for(int row =0; row < list.size()-1; row++) {
+			if(list.get(row).getOrderNumber() == list.get(row+1).getOrderNumber()) { //check if same order number (GROUP BY)				
+				BigDecimal value = list.get(row).getTotalPrice().add(list.get(row+1).getTotalPrice());			
+					Order newRow = new Order(list.get(row).getOrderNumber(), list.get(row).getCustomerNumber(), list.get(row).getCustomer(), list.get(row).getOrderDetails(), value);				
+					list.set(row+1, newRow);
+					list.remove(row);
+					row--;
+			}
+		}
+		return list;
+	}
+	
+	
+	public ArrayList<Order> where(ArrayList<Order> list, int max){
+		for(int row =0; row < list.size(); row++) {
+			if (list.get(row).getTotalPrice().compareTo(new BigDecimal(max)) <= 0) { //compareTo returns 1 if greater than
+				list.remove(list.get(row));
+				row--;
+			}
+		}
+		return list;
 	}
 	
 

@@ -20,26 +20,26 @@ public class App {
 	    //SQL for testing:
 	    //1. SELECT productLine, productCode, productName FROM products ORDER BY productLine
 	    //2. SELECT paymentDate, SUM(amount) FROM payments GROUP BY paymentDate ORDER BY paymentDate
-	    //3. SELECT customers.customerName, orders.orderNumber, SUM(orderdetails.quantityOrdered * orderdetails.priceEach) FROM orders INNER JOIN customers ON customers.customerNumber=orders.customerNumber INNER JOIN orderdetails ON orderdetails.orderNumber=orders.orderNumber GROUP BY orders.orderNumber HAVING SUM(orderdetails.quantityOrdered * orderdetails.priceEach) > 25000 ORDER BY customers.customerName
+	    //3. SELECT customers.customerName, orders.orderNumber, SUM(orderdetails.quantityOrdered * orderdetails.priceEach) FROM orders INNER JOIN customers ON customers.customerNumber=orders.customerNumber INNER JOIN orderdetails ON orderdetails.orderNumber=orders.orderNumber GROUP BY orders.orderNumber HAVING SUM(orderdetails.quantityOrdered * orderdetails.priceEach) > 25000 ORDER BY upper(customers.customerName)
 	    
 		Analytics connection = new Analytics("root","password");
 
 		//1.
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
-		//Products products = new Products(columns, connection);
-		//System.out.println(products.toString());
+		Products products = new Products(columns, connection);
+		System.out.println(products.toString());
 		
 		//2.
 		columns = Arrays.asList("PaymentDate", "Amount");
-		//Payments payments = new Payments(columns, connection);
-		//System.out.println(payments.toString());
+		Payments payments = new Payments(columns, connection);
+		System.out.println(payments.toString());
 		
 		//3.
 		columns = Arrays.asList("OrderNumber", "CustomerNumber");
 		Orders orders = new Orders(columns, connection);
 		System.out.println(orders.toString());
 		
-		//SELECT customers.customerName, orders.orderNumber, orderdetails.quantityOrdered, orderdetails.priceEach FROM orders INNER JOIN customers ON customers.customerNumber=orders.customerNumber INNER JOIN orderdetails ON orderdetails.orderNumber=orders.orderNumber;
+		
 
 		
 		

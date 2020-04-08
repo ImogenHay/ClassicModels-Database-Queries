@@ -69,8 +69,4 @@ public class OrderDetails {
 		this.priceEach = priceEach;
 	}
 
-	@Override
-	public String toString() {
-		return quantityOrdered + "      " + priceEach;
-	}
 }

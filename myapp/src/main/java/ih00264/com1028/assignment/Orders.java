@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -57,25 +58,24 @@ public class Orders {
 		ArrayList<ArrayList<Object>> list = this.analytics.select(this.columns, "orders");
 		ArrayList<Customer> customers = this.createCustomers();
 		ArrayList<OrderDetails> orderDetails = this.createOrderDetails();
-		System.out.println("HH");
 		ArrayList<Order> orders = this.analytics.innerJoin(list, orderDetails, customers);
-
-		//Collections.sort(orders);
+		Collections.sort(orders);
+		orders = this.analytics.sumValue(orders);
+		orders = this.analytics.where(orders, 25000);
 		return orders;
 	}
 
 	@Override
 	public String toString() {
-		System.out.println("Z");
 		StringBuffer buffer = new StringBuffer("\n\n3. List names of customers and their corresponding order number where a particular order from that customer has a value greater than $25,000:\n");
-		buffer.append(String.format("%-21s %-21s", this.columns.get(0), this.columns.get(1)));
-		buffer.append("\n-------------------------------------------\n");
+		buffer.append(String.format("%-41s %-21s %-21s", "CustomerName", "OrderNumber", "Value"));
+		buffer.append("\n------------------------------------------------------------------------------------\n");
 		try {
 			ArrayList<Order> list = this.createList();
 			for (Order order : list) {
 				buffer.append(order.toString() + "\n");
 			}
-			buffer.append("-------------------------------------------\n");
+			buffer.append("------------------------------------------------------------------------------------\n");
 			buffer.append("Number of Rows: " + list.size() + "\n");
 		} catch (SQLException e) {
 			System.out.println(e);

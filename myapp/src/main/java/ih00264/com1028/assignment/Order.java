@@ -3,16 +3,19 @@
  */
 package ih00264.com1028.assignment;
 
+import java.math.BigDecimal;
+
 /**
  * @author imogen
  *
  */
-public class Order {
+public class Order implements Comparable<Order>{
 	
 	private int orderNumber = 0;
 	private int customerNumber = 0;
 	private Customer customer = null;
 	private OrderDetails orderDetails = null;
+	private BigDecimal totalPrice = null;
 	
 	/**
 	 * @param orderNumber
@@ -20,12 +23,13 @@ public class Order {
 	 * @param customer
 	 * @param orderDetails
 	 */
-	public Order(int orderNumber, int customerNumber, Customer customer, OrderDetails orderDetails) {
+	public Order(int orderNumber, int customerNumber, Customer customer, OrderDetails orderDetails, BigDecimal totalPrice) {
 		super();
 		this.orderNumber = orderNumber;
 		this.customerNumber = customerNumber;
 		this.customer = customer;
 		this.orderDetails = orderDetails;
+		this.totalPrice = totalPrice;
 	}
 
 	/**
@@ -83,11 +87,35 @@ public class Order {
 	public void setOrderDetails(OrderDetails orderDetails) {
 		this.orderDetails = orderDetails;
 	}
+	
+	/**
+	 * @return the totalPrice
+	 */
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	/**
+	 * @param totalPrice the totalPrice to set
+	 */
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	@Override
+	public int compareTo(Order o) {
+		if (getCustomer().getCustomerName().toUpperCase() == null || o.getCustomer().getCustomerName().toUpperCase() == null) {
+		      return 0;
+		}
+		return getCustomer().getCustomerName().toUpperCase().compareTo(o.getCustomer().getCustomerName().toUpperCase());
+	}
 
 	@Override
 	public String toString() {
-		return customer.toString() + "    " + this.orderNumber + "     " +  orderDetails.toString();
+		return String.format("|%-40s| %-20s|%-20s|", customer.toString(), this.orderNumber, this.totalPrice);
 	}
+
+
 
 
 	
