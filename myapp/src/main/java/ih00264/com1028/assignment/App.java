@@ -3,7 +3,7 @@ package ih00264.com1028.assignment;
 
 
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,21 +25,24 @@ public class App {
 		
 		
 		Analytics connection = new Analytics("root","password"); //must also change is tests
-
+		List<String> columns = Arrays.asList("PaymentDate", "SUM(Amount)");
+		ArrayList<ArrayList<Object>> sqlData = connection.sqlTest("SELECT paymentDate, SUM(amount) FROM payments GROUP BY paymentDate ORDER BY paymentDate",columns);
+		System.out.println(sqlData);
+				
 		//1.
-		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
-		Products products = new Products(columns, connection);
-		System.out.println(products.toString());
+		//List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
+		//Products products = new Products(columns, connection);
+		//System.out.println(products.toString());
 		
 		//2.
-		columns = Arrays.asList("PaymentDate", "Amount");
-		Payments payments = new Payments(columns, connection);
-		System.out.println(payments.toString());
+		//columns = Arrays.asList("PaymentDate", "Amount");
+		//Payments payments = new Payments(columns, connection);
+		//System.out.println(payments.toString());
 		
 		//3.
-		columns = Arrays.asList("OrderNumber", "CustomerNumber");
-		Orders orders = new Orders(columns, connection);
-		System.out.println(orders.toString());
+		//columns = Arrays.asList("OrderNumber", "CustomerNumber");
+		//Orders orders = new Orders(columns, connection);
+		//System.out.println(orders.toString());
 		
 		
 

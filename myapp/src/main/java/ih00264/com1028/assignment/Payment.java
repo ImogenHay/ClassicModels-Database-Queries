@@ -23,6 +23,8 @@ public class Payment implements Comparable<Payment>{
 		this.paymentDate = paymentDate;
 		this.amount = amount;
 	}
+	
+	
 
 	/**
 	 * @return the paymentDate
@@ -31,6 +33,8 @@ public class Payment implements Comparable<Payment>{
 		return paymentDate;
 	}
 
+	
+	
 	/**
 	 * @param paymentDate the paymentDate to set
 	 */
@@ -38,12 +42,16 @@ public class Payment implements Comparable<Payment>{
 		this.paymentDate = paymentDate;
 	}
 
+	
+	
 	/**
 	 * @return the amount
 	 */
 	public BigDecimal getAmount() {
 		return amount;
 	}
+	
+	
 
 	/**
 	 * @param amount the amount to set
@@ -51,7 +59,26 @@ public class Payment implements Comparable<Payment>{
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
+	
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if(this == obj) 
+	    	return true;
+	    
+	    if(obj == null || obj.getClass()!= this.getClass()) 
+	    	return false;
+	    
+	    Payment payment = (Payment) obj;
+	    if(payment.getPaymentDate().equals(this.paymentDate) && payment.getAmount().equals(this.amount)) 
+	    	return true;
+	    
+	    return false;
+	}
 
+	
+	
 	@Override
 	public int compareTo(Payment p) {
 		if (getPaymentDate() == null || p.getPaymentDate() == null) {
@@ -60,6 +87,8 @@ public class Payment implements Comparable<Payment>{
 		return getPaymentDate().compareTo(p.getPaymentDate());
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return String.format("|%-20s| %-20s|", this.paymentDate, this.amount);

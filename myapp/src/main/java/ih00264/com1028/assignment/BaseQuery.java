@@ -33,6 +33,7 @@ public class BaseQuery {
 	protected ArrayList<ArrayList<Object>> sqlTest(String query, List<String> columns) throws SQLException{
 		Statement s = con.createStatement();
 		ResultSet rs = s.executeQuery(query);
+		//System.out.println(rs.getMetaData().getColumnName(2));
 		ArrayList<ArrayList<Object>> data = new ArrayList<>();
 		ArrayList<Object> rowData;
 		while(rs.next()) {
