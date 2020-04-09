@@ -29,7 +29,6 @@ public class Payments {
 	}
 
 
-
 	public ArrayList<Payment> createList() throws SQLException{
 		ArrayList<ArrayList<Object>> list = this.analytics.select(this.columns, "payments");
 		ArrayList<Payment> payments = new ArrayList<Payment>();
@@ -63,4 +62,5 @@ public class Payments {
 
 		return buffer.toString();
 	}
+
 }

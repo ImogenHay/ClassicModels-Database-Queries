@@ -29,6 +29,7 @@ public class Orders {
 		this.analytics = analytics;
 	}
 	
+	
 	public ArrayList<Customer> createCustomers() throws SQLException{
 		ArrayList<ArrayList<Object>> list = this.analytics.select(Arrays.asList("CustomerNumber", "CustomerName"), "customers");
 		ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -64,6 +65,7 @@ public class Orders {
 		orders = this.analytics.where(orders, 25000);
 		return orders;
 	}
+	
 
 	@Override
 	public String toString() {
@@ -83,4 +85,5 @@ public class Orders {
 
 	return buffer.toString();
 	}
+
 }

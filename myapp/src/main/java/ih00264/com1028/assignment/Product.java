@@ -72,8 +72,26 @@ public class Product implements Comparable<Product>{
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+	
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if(this == obj) 
+	    	return true;
+	    
+	    if(obj == null || obj.getClass()!= this.getClass()) 
+	    	return false;
+	    
+	    Product product = (Product) obj;
+	    if(product.getProductLine().equals(this.productLine) && product.getProductCode().equals(this.productCode) && product.getProductName().equals(this.productName)) 
+	    	return true;
+	    
+	    return false;
+	}
+	
 
-
+	
 	@Override
 	public int compareTo(Product p) {
 		if (getProductLine() == null || p.getProductLine() == null) {
@@ -81,6 +99,8 @@ public class Product implements Comparable<Product>{
 		}
 		return getProductLine().compareTo(p.getProductLine());
 	}
+	
+	
 
 	@Override
 	public String toString() {

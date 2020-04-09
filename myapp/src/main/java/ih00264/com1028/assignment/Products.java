@@ -43,8 +43,6 @@ public class Products {
 	}
 	
 
-
-
 	@Override
 	public String toString() {
 			StringBuffer buffer = new StringBuffer("\n\n1. List the products in each product line:\n");
