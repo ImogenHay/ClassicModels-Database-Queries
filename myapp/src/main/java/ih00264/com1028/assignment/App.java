@@ -24,9 +24,10 @@ public class App {
 	    
 		
 		
-		Analytics connection = new Analytics("root","password"); //must also change is tests
-		List<String> columns = Arrays.asList("PaymentDate", "SUM(Amount)");
-		ArrayList<ArrayList<Object>> sqlData = connection.sqlTest("SELECT paymentDate, SUM(amount) FROM payments GROUP BY paymentDate ORDER BY paymentDate",columns);
+		Analytics connection = new Analytics("root","password"); //must also change is tests 
+		
+		List<String> columns = Arrays.asList("CustomerName", "OrderNumber","SUM(orderdetails.quantityOrdered * orderdetails.priceEach)");
+		ArrayList<ArrayList<Object>> sqlData = connection.sqlTest("SELECT customers.customerName, orders.orderNumber, SUM(orderdetails.quantityOrdered * orderdetails.priceEach) FROM orders INNER JOIN customers ON customers.customerNumber=orders.customerNumber INNER JOIN orderdetails ON orderdetails.orderNumber=orders.orderNumber GROUP BY orders.orderNumber HAVING SUM(orderdetails.quantityOrdered * orderdetails.priceEach) > 25000 ORDER BY upper(customers.customerName)",columns);
 		System.out.println(sqlData);
 				
 		//1.

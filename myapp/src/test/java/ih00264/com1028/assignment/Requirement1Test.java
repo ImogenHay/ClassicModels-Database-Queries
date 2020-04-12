@@ -62,7 +62,7 @@ public class Requirement1Test {
 
 
 	@Test
-	public void testLength() throws SQLException {
+	public void testLength() throws SQLException { //compare SQL queries to results from code
 		Analytics connection = new Analytics("root","password");
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
 		Products products = new Products(columns, connection);
@@ -79,7 +79,7 @@ public class Requirement1Test {
 	
 	
 	@Test
-	public void testData() throws SQLException {
+	public void testData() throws SQLException { //compare SQL queries to results from code
 		Analytics connection = new Analytics("root","password");
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
 		Products products = new Products(columns, connection);
