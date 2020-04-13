@@ -29,6 +29,13 @@ public class Requirement3Test {
 	
 	
 	@Test
+	public void shouldBeEqual() {
+		assertEquals("true" ,"true");
+	}
+	
+	
+	
+	@Test
 	public void testCustomer() {
 		Customer customer = new Customer(1, "Alpha Cognac");
 		//System.out.println(customer);	
@@ -100,7 +107,7 @@ public class Requirement3Test {
 
 	@Test
 	public void testLength() throws SQLException { //compare SQL queries to results from code
-		Analytics connection = new Analytics("root","password");
+		Analytics connection = new Analytics();
 		List<String> columns = Arrays.asList("OrderNumber", "CustomerNumber");
 		Orders orders = new Orders(columns, connection);
 		
@@ -117,7 +124,7 @@ public class Requirement3Test {
 	
 	@Test
 	public void testData() throws SQLException { //compare SQL queries to results from code
-		Analytics connection = new Analytics("root","password");
+		Analytics connection = new Analytics();
 		List<String> columns = Arrays.asList("OrderNumber", "CustomerNumber");
 		Orders orders = new Orders(columns, connection);
 		

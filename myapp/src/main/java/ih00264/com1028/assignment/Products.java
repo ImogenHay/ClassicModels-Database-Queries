@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * @author imogen
+ * Creates list of product objects and displays them in formatted way
  *
  */
 public class Products {
@@ -41,6 +42,7 @@ public class Products {
 		Collections.sort(products);
 		return products;
 	}
+	
 	
 
 	@Override

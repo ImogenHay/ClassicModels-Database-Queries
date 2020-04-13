@@ -29,6 +29,13 @@ public class Requirement1Test {
 	
 	
 	@Test
+	public void shouldBeEqual() {
+		assertEquals("true" ,"true");
+	}
+	
+	
+	
+	@Test
 	public void testProduct() {
 		Product product = new Product("Classic Cars", "S10_1949", "1952 Alpine Renault 1300");
 		//System.out.println(product);	
@@ -63,7 +70,7 @@ public class Requirement1Test {
 
 	@Test
 	public void testLength() throws SQLException { //compare SQL queries to results from code
-		Analytics connection = new Analytics("root","password");
+		Analytics connection = new Analytics();
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
 		Products products = new Products(columns, connection);
 		
@@ -80,7 +87,7 @@ public class Requirement1Test {
 	
 	@Test
 	public void testData() throws SQLException { //compare SQL queries to results from code
-		Analytics connection = new Analytics("root","password");
+		Analytics connection = new Analytics();
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
 		Products products = new Products(columns, connection);
 		

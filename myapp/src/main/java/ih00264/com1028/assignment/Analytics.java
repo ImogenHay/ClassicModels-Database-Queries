@@ -11,16 +11,17 @@ import java.util.List;
 
 /**
  * @author imogen
+ * Class to connect to database and provide methods of java code to act as SQL statements
  *
  */
 public class Analytics extends BaseQuery {
 
-	/**
-	 * @param uname
-	 * @param pwd
-	 */
-	public Analytics(String uname, String pwd) {
-		super(uname, pwd);
+	private final static String USERNAME = "root";
+	private final static String PASSWORD = " ";  // TODO CHNAGE TO YOUR ROOT YOUR ROOT PASSWORD
+	
+
+	public Analytics() {
+		super(USERNAME, PASSWORD);
 	}
 
 	
@@ -52,6 +53,7 @@ public class Analytics extends BaseQuery {
 		
 	}
 	
+	
 
 	public ArrayList<Payment> sumAmount(ArrayList<Payment> list){
 		for(int row =0; row < list.size()-1; row++) {
@@ -65,6 +67,7 @@ public class Analytics extends BaseQuery {
 		}
 		return list;
 	}
+	
 	
 	
 	public ArrayList<Order> innerJoin(ArrayList<ArrayList<Object>> list, ArrayList<OrderDetails> orderDetails, ArrayList<Customer> customers){
@@ -90,6 +93,7 @@ public class Analytics extends BaseQuery {
 	}
 	
 	
+	
 	public ArrayList<Order> sumValue(ArrayList<Order> list){
 		for(int row =0; row < list.size()-1; row++) {
 			if(list.get(row).getOrderNumber() == list.get(row+1).getOrderNumber()) { //check if same order number (GROUP BY)				
@@ -102,6 +106,7 @@ public class Analytics extends BaseQuery {
 		}
 		return list;
 	}
+	
 	
 	
 	public ArrayList<Order> where(ArrayList<Order> list, int max){

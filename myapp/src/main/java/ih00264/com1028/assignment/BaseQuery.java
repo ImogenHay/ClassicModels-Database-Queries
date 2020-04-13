@@ -1,5 +1,10 @@
 package ih00264.com1028.assignment;
 
+/**
+ * @author imogen
+ * Connects to database and retrieves data from tables
+ */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,7 +35,7 @@ public class BaseQuery {
 		return rs;
 	}
 	
-	protected ArrayList<ArrayList<Object>> sqlTest(String query, List<String> columns) throws SQLException{
+	protected ArrayList<ArrayList<Object>> sqlTest(String query, List<String> columns) throws SQLException{ //used in testing to execute SQL statements
 		Statement s = con.createStatement();
 		ResultSet rs = s.executeQuery(query);
 		//System.out.println(rs.getMetaData().getColumnName(1));

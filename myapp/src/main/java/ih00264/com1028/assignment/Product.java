@@ -5,7 +5,7 @@ package ih00264.com1028.assignment;
 
 /**
  * @author imogen
- *
+ * Creates product object using product table
  */
 public class Product implements Comparable<Product>{
 
@@ -76,7 +76,7 @@ public class Product implements Comparable<Product>{
 	
 	
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { //used in testing to check if two objects in list of lists have the same attributes
 	    if(this == obj) 
 	    	return true;
 	    
@@ -93,7 +93,7 @@ public class Product implements Comparable<Product>{
 
 	
 	@Override
-	public int compareTo(Product p) {
+	public int compareTo(Product p) { //used to sort list of payments in order of their product line
 		if (getProductLine() == null || p.getProductLine() == null) {
 		      return 0;
 		}

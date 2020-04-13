@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 /**
  * @author imogen
+ * Creates order details object from order details table
  *
  */
 public class OrderDetails {

@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * @author imogen
+ * Creates list of payment objects and displays them in formatted way
  *
  */
 public class Payments {
@@ -28,6 +29,7 @@ public class Payments {
 		this.analytics = analytics;
 	}
 
+	
 
 	public ArrayList<Payment> createList() throws SQLException{
 		ArrayList<ArrayList<Object>> list = this.analytics.select(this.columns, "payments");

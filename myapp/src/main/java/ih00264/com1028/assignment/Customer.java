@@ -5,7 +5,7 @@ package ih00264.com1028.assignment;
 
 /**
  * @author imogen
- *
+ * Creates customer objects from customer table 
  */
 public class Customer {
 	

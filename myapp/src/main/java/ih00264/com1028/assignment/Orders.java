@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author imogen
- *
+ * Creates list of order objects and displays them in formatted way
  */
 public class Orders {
 	
@@ -28,6 +28,7 @@ public class Orders {
 		this.columns = columns;
 		this.analytics = analytics;
 	}
+	
 	
 	
 	public ArrayList<Customer> createCustomers() throws SQLException{

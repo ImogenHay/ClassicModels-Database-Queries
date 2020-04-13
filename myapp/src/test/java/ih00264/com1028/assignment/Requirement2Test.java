@@ -21,9 +21,18 @@ import org.junit.Test;
  */
 public class Requirement2Test {
 	
+	
+	
 	@Test
 	public void shouldAnswerWithTrue() {
 		assertTrue( true );
+	}
+	
+	
+	
+	@Test
+	public void shouldBeEqual() {
+		assertEquals("true" ,"true");
 	}
 	
 	
@@ -55,7 +64,7 @@ public class Requirement2Test {
 
 	@Test
 	public void testLength() throws SQLException { //compare SQL queries to results from code
-		Analytics connection = new Analytics("root","password");
+		Analytics connection = new Analytics();
 		List<String> columns = Arrays.asList("PaymentDate", "amount");
 		Payments payments = new Payments(columns, connection);
 		
@@ -73,7 +82,7 @@ public class Requirement2Test {
 	
 	@Test
 	public void testData() throws SQLException { //compare SQL queries to results from code
-		Analytics connection = new Analytics("root","password");
+		Analytics connection = new Analytics();
 		List<String> columns = Arrays.asList("PaymentDate", "Amount");
 		Payments payments = new Payments(columns, connection);
 		

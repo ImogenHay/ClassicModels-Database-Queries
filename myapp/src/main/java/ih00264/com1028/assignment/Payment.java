@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 /**
  * @author imogen
- *
+ * Creates payment objects using payment table
  */
 public class Payment implements Comparable<Payment>{
 	
@@ -63,7 +63,7 @@ public class Payment implements Comparable<Payment>{
 	
 	
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { //used in testing to check if two objects in list of lists have the same attributes
 	    if(this == obj) 
 	    	return true;
 	    
@@ -80,7 +80,7 @@ public class Payment implements Comparable<Payment>{
 	
 	
 	@Override
-	public int compareTo(Payment p) {
+	public int compareTo(Payment p) { //used to sort list of payments in order of their date
 		if (getPaymentDate() == null || p.getPaymentDate() == null) {
 		      return 0;
 		}

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 /**
  * @author imogen
- *
+ * Creates order objects from order table and customer and orderdetail objects
  */
 public class Order implements Comparable<Order>{
 	
@@ -104,7 +104,7 @@ public class Order implements Comparable<Order>{
 	}
 	
 	@Override
-	public int compareTo(Order o) {
+	public int compareTo(Order o) { //used for sorting list of order by their customer name
 		if (getCustomer().getCustomerName().toUpperCase() == null || o.getCustomer().getCustomerName().toUpperCase() == null) {
 		      return 0;
 		}
