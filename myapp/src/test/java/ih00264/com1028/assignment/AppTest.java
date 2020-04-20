@@ -15,5 +15,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ Requirement1Test.class, Requirement2Test.class, Requirement3Test.class })
 public class AppTest {
+	
 
 }
