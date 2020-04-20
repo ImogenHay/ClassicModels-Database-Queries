@@ -17,7 +17,7 @@ import java.util.List;
 public class Analytics extends BaseQuery {
 
 	private final static String USERNAME = "root";
-	private final static String PASSWORD = " ";  // TODO CHNAGE TO YOUR ROOT YOUR ROOT PASSWORD
+	private final static String PASSWORD = "";  // TODO CHNAGE TO YOUR ROOT YOUR ROOT PASSWORD
 	
 
 	public Analytics() {
