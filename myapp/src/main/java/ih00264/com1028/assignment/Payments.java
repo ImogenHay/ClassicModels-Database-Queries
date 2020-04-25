@@ -18,6 +18,7 @@ public class Payments {
 	
 	private List<String> columns = null;
 	private Analytics analytics = null;
+	private ArrayList<Payment> payments = null;
 	
 	/**
 	 * @param columns
@@ -27,21 +28,46 @@ public class Payments {
 		super();
 		this.columns = columns;
 		this.analytics = analytics;
+		this.payments = new ArrayList<Payment>();
 	}
 
-	
 
-	public ArrayList<Payment> createList() throws SQLException{
+	/**
+	 * @return the columns
+	 */
+	public List<String> getColumns() {
+		return columns;
+	}
+
+
+
+	/**
+	 * @param columns the columns to set
+	 */
+	public void setColumns(List<String> columns) {
+		this.columns = columns;
+	}
+
+
+
+	/**
+	 * @return the payments
+	 */
+	public ArrayList<Payment> getPayments() {
+		return payments;
+	}
+
+
+
+	public void createList() throws SQLException{
 		ArrayList<ArrayList<Object>> list = this.analytics.select(this.columns, "payments");
-		ArrayList<Payment> payments = new ArrayList<Payment>();
 		for(ArrayList<Object> p_list : list) {
 			BigDecimal amount = new BigDecimal(p_list.get(1).toString());
 			Payment payment = new Payment(p_list.get(0).toString(), amount);
-			payments.add(payment);
+			this.payments.add(payment);
 		}
-		Collections.sort(payments);
-		payments = this.analytics.sumAmount(payments);
-		return payments;
+		Collections.sort(this.payments);
+		this.payments = this.analytics.sumAmount(this.payments);
 	}
 	
 	
@@ -51,16 +77,11 @@ public class Payments {
 			StringBuffer buffer = new StringBuffer("\n\n2. Report the total payments by date:\n");
 			buffer.append(String.format("%-21s %-21s", this.columns.get(0), this.columns.get(1)));
 			buffer.append("\n-------------------------------------------\n");
-			try {
-				ArrayList<Payment> list = this.createList();
-				for (Payment payment : list) {
-					buffer.append(payment.toString() + "\n");
-				}
-				buffer.append("-------------------------------------------\n");
-				buffer.append("Number of Rows: " + list.size() + "\n");
-			} catch (SQLException e) {
-				System.out.println(e);
+			for (Payment payment : this.payments) {
+				buffer.append(payment.toString() + "\n");
 			}
+				buffer.append("-------------------------------------------\n");
+				buffer.append("Number of Rows: " + this.payments.size() + "\n");
 
 		return buffer.toString();
 	}

@@ -35,16 +35,19 @@ public class App {
 		//1.
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
 		Products products = new Products(columns, connection);
+		products.createList();
 		System.out.println(products.toString());
 		
 		//2.
 		columns = Arrays.asList("PaymentDate", "Amount");
 		Payments payments = new Payments(columns, connection);
+		payments.createList();
 		System.out.println(payments.toString());
 		
 		//3.
 		columns = Arrays.asList("OrderNumber", "CustomerNumber");
 		Orders orders = new Orders(columns, connection);
+		orders.createList();
 		System.out.println(orders.toString());
 		
 		

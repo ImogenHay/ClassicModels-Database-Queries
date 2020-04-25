@@ -18,6 +18,7 @@ public class Orders {
 	
 	private List<String> columns = null;
 	private Analytics analytics = null;
+	private ArrayList<Order> orders = null;
 	
 	/**
 	 * @param columns
@@ -27,11 +28,39 @@ public class Orders {
 		super();
 		this.columns = columns;
 		this.analytics = analytics;
+		this.orders = new ArrayList<Order>();
 	}
 	
 	
 	
-	public ArrayList<Customer> createCustomers() throws SQLException{
+	/**
+	 * @return the columns
+	 */
+	public List<String> getColumns() {
+		return columns;
+	}
+
+
+
+	/**
+	 * @param columns the columns to set
+	 */
+	public void setColumns(List<String> columns) {
+		this.columns = columns;
+	}
+
+
+
+	/**
+	 * @return the orders
+	 */
+	public ArrayList<Order> getOrders() {
+		return orders;
+	}
+
+
+
+	private ArrayList<Customer> createCustomers() throws SQLException{
 		ArrayList<ArrayList<Object>> list = this.analytics.select(Arrays.asList("CustomerNumber", "CustomerName"), "customers");
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		for(ArrayList<Object> p_list : list) {
@@ -43,7 +72,7 @@ public class Orders {
 	
 	
 	
-	public ArrayList<OrderDetails> createOrderDetails() throws SQLException{
+	private ArrayList<OrderDetails> createOrderDetails() throws SQLException{
 		ArrayList<ArrayList<Object>> list = this.analytics.select(Arrays.asList("OrderNumber", "QuantityOrdered", "PriceEach"), "orderdetails");
 		ArrayList<OrderDetails> orderdetails = new ArrayList<OrderDetails>();
 		for(ArrayList<Object> p_list : list) {
@@ -56,15 +85,14 @@ public class Orders {
 	
 	
 	
-	public ArrayList<Order> createList() throws SQLException{		
+	public void createList() throws SQLException{		
 		ArrayList<ArrayList<Object>> list = this.analytics.select(this.columns, "orders");
 		ArrayList<Customer> customers = this.createCustomers();
 		ArrayList<OrderDetails> orderDetails = this.createOrderDetails();
-		ArrayList<Order> orders = this.analytics.innerJoin(list, orderDetails, customers);
-		Collections.sort(orders);
-		orders = this.analytics.sumValue(orders);
-		orders = this.analytics.where(orders, 25000);
-		return orders;
+		this.orders = this.analytics.innerJoin(list, orderDetails, customers);
+		Collections.sort(this.orders);
+		this.orders = this.analytics.sumValue(this.orders);
+		this.orders = this.analytics.where(this.orders, 25000);
 	}
 	
 
@@ -73,17 +101,11 @@ public class Orders {
 		StringBuffer buffer = new StringBuffer("\n\n3. List names of customers and their corresponding order number where a particular order from that customer has a value greater than $25,000:\n");
 		buffer.append(String.format("%-41s %-21s %-21s", "CustomerName", "OrderNumber", "Value"));
 		buffer.append("\n------------------------------------------------------------------------------------\n");
-		try {
-			ArrayList<Order> list = this.createList();
-			for (Order order : list) {
-				buffer.append(order.toString() + "\n");
-			}
-			buffer.append("------------------------------------------------------------------------------------\n");
-			buffer.append("Number of Rows: " + list.size() + "\n");
-		} catch (SQLException e) {
-			System.out.println(e);
+		for (Order order : this.orders) {
+			buffer.append(order.toString() + "\n");
 		}
-
+			buffer.append("------------------------------------------------------------------------------------\n");
+			buffer.append("Number of Rows: " + this.orders.size() + "\n");
 	return buffer.toString();
 	}
 

@@ -74,7 +74,8 @@ public class Requirement1Test {
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
 		Products products = new Products(columns, connection);
 		
-		ArrayList<Product> createdList = products.createList();
+		products.createList();
+		ArrayList<Product> createdList = products.getProducts();
 		
 		ArrayList<ArrayList<Object>> sqlData = connection.sqlTest("SELECT productLine, productCode, productName FROM products ORDER BY productLine",columns);
 
@@ -91,7 +92,8 @@ public class Requirement1Test {
 		List<String> columns = Arrays.asList("ProductLine", "ProductCode", "ProductName");
 		Products products = new Products(columns, connection);
 		
-		ArrayList<Product> createdList = products.createList();
+		products.createList();
+		ArrayList<Product> createdList = products.getProducts();
 		
 		ArrayList<ArrayList<Object>> sqlData = connection.sqlTest("SELECT productLine, productCode, productName FROM products ORDER BY productLine",columns);
 		ArrayList<Product> sqlList = new ArrayList<Product>();

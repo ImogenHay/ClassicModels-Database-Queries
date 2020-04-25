@@ -111,7 +111,8 @@ public class Requirement3Test {
 		List<String> columns = Arrays.asList("OrderNumber", "CustomerNumber");
 		Orders orders = new Orders(columns, connection);
 		
-		ArrayList<Order> createdList = orders.createList();
+		orders.createList();
+		ArrayList<Order> createdList = orders.getOrders();
 		
 		columns = Arrays.asList("CustomerName", "OrderNumber","SUM(orderdetails.quantityOrdered * orderdetails.priceEach)");
 		ArrayList<ArrayList<Object>> sqlData = connection.sqlTest("SELECT customers.customerName, orders.orderNumber, SUM(orderdetails.quantityOrdered * orderdetails.priceEach) FROM orders INNER JOIN customers ON customers.customerNumber=orders.customerNumber INNER JOIN orderdetails ON orderdetails.orderNumber=orders.orderNumber GROUP BY orders.orderNumber HAVING SUM(orderdetails.quantityOrdered * orderdetails.priceEach) > 25000 ORDER BY upper(customers.customerName)",columns);
@@ -128,7 +129,8 @@ public class Requirement3Test {
 		List<String> columns = Arrays.asList("OrderNumber", "CustomerNumber");
 		Orders orders = new Orders(columns, connection);
 		
-		ArrayList<Order> createdObjects = orders.createList();
+		orders.createList();
+		ArrayList<Order> createdObjects = orders.getOrders();
 		ArrayList<ArrayList<Object>> createdList = new ArrayList<>();
 		for (Order order : createdObjects) {
 			ArrayList<Object> orderList = new ArrayList<>();

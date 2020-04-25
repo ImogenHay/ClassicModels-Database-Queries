@@ -68,7 +68,8 @@ public class Requirement2Test {
 		List<String> columns = Arrays.asList("PaymentDate", "amount");
 		Payments payments = new Payments(columns, connection);
 		
-		ArrayList<Payment> createdList = payments.createList();
+		payments.createList();
+		ArrayList<Payment> createdList = payments.getPayments();
 		
 		columns = Arrays.asList("PaymentDate", "SUM(amount)");
 		ArrayList<ArrayList<Object>> sqlData = connection.sqlTest("SELECT paymentDate, SUM(amount) FROM payments GROUP BY paymentDate ORDER BY paymentDate",columns);
@@ -86,7 +87,8 @@ public class Requirement2Test {
 		List<String> columns = Arrays.asList("PaymentDate", "Amount");
 		Payments payments = new Payments(columns, connection);
 		
-		ArrayList<Payment> createdList = payments.createList();
+		payments.createList();
+		ArrayList<Payment> createdList = payments.getPayments();
 		
 		columns = Arrays.asList("PaymentDate", "SUM(amount)");
 		ArrayList<ArrayList<Object>> sqlData = connection.sqlTest("SELECT paymentDate, SUM(amount) FROM payments GROUP BY paymentDate ORDER BY paymentDate",columns);
